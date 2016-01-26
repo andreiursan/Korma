@@ -303,8 +303,10 @@
         keys-clause (utils/comma-separated (map field-identifier ins-keys))
         ins-values (insert-values-clause ins-keys (:values query))
         values-clause (utils/comma-separated ins-values)
+        _ (println "DEBUG: " query)
+        output-inserted "OUTPUT Inserted.*"
         neue-sql (if-not (empty? ins-keys)
-                   (str "INSERT INTO " (table-str query) " " (utils/wrap keys-clause) " VALUES " values-clause)
+                   (str "INSERT INTO " (table-str query) " " (utils/wrap keys-clause) " " output-inserted " VALUES " values-clause)
                    noop-query)]
     (assoc query :sql-str neue-sql)))
 
